@@ -204,7 +204,9 @@ abstract class AbstractSpatialType extends Type
         $const = sprintf('self::PLATFORM_%s', strtoupper($platform->getName()));
 
         if (! defined($const)) {
-            throw new UnsupportedPlatformException(sprintf('DBAL platform "%s" is not currently supported.', $platform->getName()));
+            //TODO: Хак для Clickhouse (убрать)
+            $const = 'self::PLATFORM_MYSQL';
+//            throw new UnsupportedPlatformException(sprintf('DBAL platform "%s" is not currently supported.', $platform->getName()));
         }
 
         $class = sprintf('CrEOF\Spatial\DBAL\Platform\%s', constant($const));
